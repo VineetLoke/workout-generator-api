@@ -159,6 +159,126 @@
             "difficulty": "advanced",
             "description": "Single-leg squat with rear foot elevated on bench",
             "equipment": "bench, dumbbells"
+        },
+        {
+            "id": 21,
+            "name": "Overhead Press",
+            "muscle": "shoulders",
+            "difficulty": "intermediate",
+            "description": "Press a barbell overhead from shoulder level",
+            "equipment": "barbell"
+        },
+        {
+            "id": 22,
+            "name": "Lateral Raises",
+            "muscle": "shoulders",
+            "difficulty": "beginner",
+            "description": "Raise dumbbells out to the sides until parallel with floor",
+            "equipment": "dumbbells"
+        },
+        {
+            "id": 23,
+            "name": "Arnold Press",
+            "muscle": "shoulders",
+            "difficulty": "intermediate",
+            "description": "Rotating dumbbell press named after Arnold Schwarzenegger",
+            "equipment": "dumbbells"
+        },
+        {
+            "id": 24,
+            "name": "Front Raises",
+            "muscle": "shoulders",
+            "difficulty": "beginner",
+            "description": "Raise dumbbells in front of body to shoulder height",
+            "equipment": "dumbbells"
+        },
+        {
+            "id": 25,
+            "name": "Handstand Push-ups",
+            "muscle": "shoulders",
+            "difficulty": "advanced",
+            "description": "Push-ups performed in a handstand position against wall",
+            "equipment": "none"
+        },
+        {
+            "id": 26,
+            "name": "Bicep Curls",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Curl dumbbells from hips to shoulders",
+            "equipment": "dumbbells"
+        },
+        {
+            "id": 27,
+            "name": "Tricep Dips",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Dips on a bench or parallel bars targeting triceps",
+            "equipment": "bench"
+        },
+        {
+            "id": 28,
+            "name": "Hammer Curls",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Curls with neutral grip targeting brachialis",
+            "equipment": "dumbbells"
+        },
+        {
+            "id": 29,
+            "name": "Skull Crushers",
+            "muscle": "arms",
+            "difficulty": "intermediate",
+            "description": "Lying tricep extension with EZ bar or dumbbells",
+            "equipment": "EZ bar, bench"
+        },
+        {
+            "id": 30,
+            "name": "Preacher Curls",
+            "muscle": "arms",
+            "difficulty": "intermediate",
+            "description": "Bicep curls performed on a preacher bench",
+            "equipment": "preacher bench, barbell"
+        },
+        {
+            "id": 31,
+            "name": "Plank",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Hold body in straight line supported on forearms and toes",
+            "equipment": "none"
+        },
+        {
+            "id": 32,
+            "name": "Russian Twists",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Seated twist holding weight, alternating sides",
+            "equipment": "dumbbell"
+        },
+        {
+            "id": 33,
+            "name": "Hanging Leg Raises",
+            "muscle": "core",
+            "difficulty": "advanced",
+            "description": "Raise legs while hanging from a pull-up bar",
+            "equipment": "pull-up bar"
+        },
+        {
+            "id": 34,
+            "name": "Ab Wheel Rollouts",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Roll ab wheel out and back while maintaining plank",
+            "equipment": "ab wheel"
+        },
+        {
+            "id": 35,
+            "name": "Dead Bug",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Lie on back and alternate extending opposite arm and leg",
+            "equipment": "none"
         }
     ]
 }

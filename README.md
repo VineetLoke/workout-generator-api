@@ -1,98 +1,63 @@
 # Workout Generator API
 
-A simple REST API that generates random workout exercises based on muscle group and difficulty level.
+A REST API that generates random workout exercises based on muscle group and difficulty level.
 
 ## Installation
 
 ```bash
-# Navigate to project directory
 cd workout-generator-api
-
-# Install dependencies
 npm install
-
-# Start the server
 npm start
 ```
 
 ## API Endpoints
 
-### Generate Workout
-```
-GET /generate-workout
-```
+### GET /exercises
+List all exercises with filtering and pagination.
 
-Returns 3 random exercises based on optional filters.
-
-**Query Parameters:**
-| Parameter | Type | Options | Description |
-|-----------|------|---------|-------------|
-| `muscle` | string | `chest`, `back`, `legs` | Filter by muscle group |
-| `difficulty` | string | `beginner`, `intermediate`, `advanced` | Filter by difficulty |
-
-**Examples:**
+| Parameter | Type | Options | Default |
+|-----------|------|---------|---------|
+| `muscle` | string | `chest`, `back`, `legs`, `shoulders`, `arms`, `core` | all |
+| `difficulty` | string | `beginner`, `intermediate`, `advanced` | all |
+| `equipment` | string | any equipment name | all |
+| `page` | number | 1+ | 1 |
+| `limit` | number | 1-50 | 10 |
 
 ```bash
-# Get 3 random exercises (no filter)
-curl http://localhost:3000/generate-workout
-
-# Get chest exercises
-curl http://localhost:3000/generate-workout?muscle=chest
-
-# Get beginner leg exercises
-curl http://localhost:3000/generate-workout?muscle=legs&difficulty=beginner
+curl "http://localhost:3000/exercises?muscle=chest&page=1&limit=5"
 ```
 
-**Sample Response:**
-```json
-{
-  "workout": [
-    {
-      "id": 2,
-      "name": "Push-ups",
-      "muscle": "chest",
-      "difficulty": "beginner",
-      "description": "Classic bodyweight exercise performed in a plank position",
-      "equipment": "none"
-    },
-    {
-      "id": 16,
-      "name": "Lunges",
-      "muscle": "legs",
-      "difficulty": "beginner",
-      "description": "Step forward into a lunge position, alternating legs",
-      "equipment": "none"
-    },
-    {
-      "id": 10,
-      "name": "Lat Pulldowns",
-      "muscle": "back",
-      "difficulty": "beginner",
-      "description": "Pull a cable bar down to chest level while seated",
-      "equipment": "cable machine"
-    }
-  ],
-  "count": 3,
-  "filters": {
-    "muscle": "all",
-    "difficulty": "beginner"
-  }
-}
+---
+
+### GET /generate-workout
+Generate random exercises for a workout.
+
+| Parameter | Type | Options | Default |
+|-----------|------|---------|---------|
+| `muscle` | string | `chest`, `back`, `legs`, `shoulders`, `arms`, `core` | all |
+| `difficulty` | string | `beginner`, `intermediate`, `advanced` | all |
+| `count` | number | 1-10 | 3 |
+
+```bash
+# Get 5 beginner chest exercises
+curl "http://localhost:3000/generate-workout?muscle=chest&difficulty=beginner&count=5"
 ```
 
-### Health Check
-```
-GET /health
-```
+---
 
-Returns server status.
+### GET /health
+Server health check.
 
 ## Configuration
 
-Create a `.env` file to configure the port (default: 3000):
+```env
+PORT=3000
+```
+
+## Live API
 
 ```
-PORT=3000
+https://workout-generator-api-phig.onrender.com
 ```
 
 ## License
