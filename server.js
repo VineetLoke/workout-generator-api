@@ -145,6 +145,104 @@ app.get('/generate-workout', (req, res) => {
     });
 });
 
+/**
+ * GET /workout-plan
+ * Query params:
+ *   - difficulty: beginner | intermediate | advanced (default: intermediate)
+ *   - days: number of workout days per week (default: 5, max: 7)
+ * Returns a weekly workout plan
+ */
+app.get('/workout-plan', (req, res) => {
+    const { difficulty = 'intermediate', days = 5 } = req.query;
+
+    // Validate difficulty
+    const validDifficulties = ['beginner', 'intermediate', 'advanced'];
+    if (!validDifficulties.includes(difficulty.toLowerCase())) {
+        return res.status(400).json({
+            error: 'Invalid difficulty parameter',
+            validOptions: validDifficulties
+        });
+    }
+
+    // Parse and validate days
+    const workoutDays = Math.min(7, Math.max(1, parseInt(days) || 5));
+
+    // Define workout split based on difficulty
+    const workoutSplits = {
+        beginner: [
+            { name: 'Full Body A', muscles: ['chest', 'back', 'legs'] },
+            { name: 'Rest', muscles: [] },
+            { name: 'Full Body B', muscles: ['shoulders', 'arms', 'core'] },
+            { name: 'Rest', muscles: [] },
+            { name: 'Full Body A', muscles: ['chest', 'back', 'legs'] },
+            { name: 'Active Recovery', muscles: ['core'] },
+            { name: 'Rest', muscles: [] }
+        ],
+        intermediate: [
+            { name: 'Push Day', muscles: ['chest', 'shoulders'] },
+            { name: 'Pull Day', muscles: ['back', 'arms'] },
+            { name: 'Leg Day', muscles: ['legs', 'core'] },
+            { name: 'Rest', muscles: [] },
+            { name: 'Upper Body', muscles: ['chest', 'back', 'shoulders'] },
+            { name: 'Lower Body', muscles: ['legs', 'core'] },
+            { name: 'Rest', muscles: [] }
+        ],
+        advanced: [
+            { name: 'Chest & Triceps', muscles: ['chest', 'arms'] },
+            { name: 'Back & Biceps', muscles: ['back', 'arms'] },
+            { name: 'Legs', muscles: ['legs'] },
+            { name: 'Shoulders & Core', muscles: ['shoulders', 'core'] },
+            { name: 'Upper Power', muscles: ['chest', 'back'] },
+            { name: 'Lower Power', muscles: ['legs', 'core'] },
+            { name: 'Active Recovery', muscles: ['core', 'shoulders'] }
+        ]
+    };
+
+    const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const split = workoutSplits[difficulty.toLowerCase()];
+
+    // Generate the weekly plan
+    const weeklyPlan = [];
+
+    for (let i = 0; i < 7; i++) {
+        const dayPlan = split[i];
+
+        if (dayPlan.muscles.length === 0) {
+            // Rest day
+            weeklyPlan.push({
+                day: dayNames[i],
+                type: dayPlan.name,
+                exercises: []
+            });
+        } else {
+            // Workout day - get exercises for each muscle group
+            const dayExercises = [];
+
+            for (const muscle of dayPlan.muscles) {
+                const muscleExercises = data.exercises.filter(
+                    ex => ex.muscle === muscle
+                );
+                const shuffled = shuffleArray(muscleExercises);
+                // Pick 2 exercises per muscle group
+                dayExercises.push(...shuffled.slice(0, 2));
+            }
+
+            weeklyPlan.push({
+                day: dayNames[i],
+                type: dayPlan.name,
+                exercises: dayExercises
+            });
+        }
+    }
+
+    res.json({
+        plan: weeklyPlan,
+        difficulty: difficulty.toLowerCase(),
+        totalWorkoutDays: weeklyPlan.filter(d => d.exercises.length > 0).length,
+        totalExercises: weeklyPlan.reduce((sum, d) => sum + d.exercises.length, 0)
+    });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -154,12 +252,13 @@ app.get('/health', (req, res) => {
 app.get('/', (req, res) => {
     res.json({
         message: 'Welcome to the Workout Generator API',
-        version: '2.0.0',
+        version: '3.0.0',
         totalExercises: data.exercises.length,
         muscleGroups: ['chest', 'back', 'legs', 'shoulders', 'arms', 'core'],
         endpoints: {
             exercises: 'GET /exercises?muscle=chest&difficulty=beginner&equipment=dumbbells&page=1&limit=10',
             generateWorkout: 'GET /generate-workout?muscle=chest&difficulty=beginner&count=5',
+            workoutPlan: 'GET /workout-plan?difficulty=intermediate',
             health: 'GET /health'
         }
     });
