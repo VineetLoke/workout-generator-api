@@ -6,13 +6,40 @@ const data = require('./data.json');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// In-memory storage for custom exercises
+// In-memory storage
 let customExercises = [];
 let nextCustomId = 1000;
+let favorites = new Set();
+let apiStats = {
+    totalRequests: 0,
+    endpointHits: {},
+    popularExercises: {},
+    startTime: new Date().toISOString()
+};
+
+// Exercise categories
+const exerciseCategories = {
+    compound: [1, 4, 7, 8, 9, 12, 14, 15, 18, 20, 21, 25],
+    isolation: [2, 3, 5, 6, 10, 11, 13, 16, 17, 19, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+    push: [1, 2, 3, 4, 5, 6, 7, 21, 23, 24, 25, 27, 29],
+    pull: [8, 9, 10, 11, 12, 13, 14, 26, 28, 30]
+};
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files (HTML landing page)
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Stats tracking middleware
+app.use((req, res, next) => {
+    apiStats.totalRequests++;
+    const endpoint = req.path;
+    apiStats.endpointHits[endpoint] = (apiStats.endpointHits[endpoint] || 0) + 1;
+    next();
+});
 
 /**
  * Shuffle array using Fisher-Yates algorithm
@@ -31,6 +58,18 @@ function shuffleArray(array) {
  */
 function getAllExercises() {
     return [...data.exercises, ...customExercises];
+}
+
+/**
+ * Get exercise category
+ */
+function getExerciseCategory(id) {
+    return {
+        compound: exerciseCategories.compound.includes(id),
+        isolation: exerciseCategories.isolation.includes(id),
+        push: exerciseCategories.push.includes(id),
+        pull: exerciseCategories.pull.includes(id)
+    };
 }
 
 /**
@@ -417,28 +456,301 @@ app.delete('/exercises/:id', (req, res) => {
     });
 });
 
+/**
+ * GET /stats
+ * Returns API usage statistics
+ */
+app.get('/stats', (req, res) => {
+    const uptime = Math.floor((Date.now() - new Date(apiStats.startTime).getTime()) / 1000);
+
+    // Get top 5 endpoints
+    const topEndpoints = Object.entries(apiStats.endpointHits)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([endpoint, hits]) => ({ endpoint, hits }));
+
+    // Get top 5 popular exercises
+    const topExercises = Object.entries(apiStats.popularExercises)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([id, views]) => {
+            const exercise = getAllExercises().find(ex => ex.id === parseInt(id));
+            return { name: exercise?.name || 'Unknown', views };
+        });
+
+    res.json({
+        totalRequests: apiStats.totalRequests,
+        uptime: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m ${uptime % 60}s`,
+        startTime: apiStats.startTime,
+        topEndpoints,
+        topExercises,
+        totalExercises: getAllExercises().length,
+        customExercises: customExercises.length,
+        totalFavorites: favorites.size
+    });
+});
+
+/**
+ * GET /exercise/:id
+ * Get single exercise by ID with categories
+ */
+app.get('/exercise/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const exercise = getAllExercises().find(ex => ex.id === id);
+
+    if (!exercise) {
+        return res.status(404).json({ error: 'Exercise not found' });
+    }
+
+    // Track popularity
+    apiStats.popularExercises[id] = (apiStats.popularExercises[id] || 0) + 1;
+
+    res.json({
+        ...exercise,
+        categories: getExerciseCategory(id),
+        isFavorite: favorites.has(id)
+    });
+});
+
+/**
+ * GET /muscles
+ * List all muscle groups with exercise counts
+ */
+app.get('/muscles', (req, res) => {
+    const muscles = ['chest', 'back', 'legs', 'shoulders', 'arms', 'core'];
+    const allExercises = getAllExercises();
+
+    const muscleData = muscles.map(muscle => {
+        const exercises = allExercises.filter(ex => ex.muscle === muscle);
+        return {
+            muscle,
+            exerciseCount: exercises.length,
+            difficulties: {
+                beginner: exercises.filter(ex => ex.difficulty === 'beginner').length,
+                intermediate: exercises.filter(ex => ex.difficulty === 'intermediate').length,
+                advanced: exercises.filter(ex => ex.difficulty === 'advanced').length
+            }
+        };
+    });
+
+    res.json({
+        muscles: muscleData,
+        totalExercises: allExercises.length
+    });
+});
+
+/**
+ * GET /superset
+ * Generate superset pairs (antagonist muscle groups)
+ * Query params:
+ *   - type: push-pull | upper-lower | same-muscle (default: push-pull)
+ *   - sets: number of superset pairs (default: 3)
+ */
+app.get('/superset', (req, res) => {
+    const { type = 'push-pull', sets = 3 } = req.query;
+
+    const allExercises = getAllExercises();
+    const setCount = Math.min(5, Math.max(1, parseInt(sets) || 3));
+
+    let supersets = [];
+
+    if (type === 'push-pull') {
+        const pushExercises = allExercises.filter(ex => exerciseCategories.push.includes(ex.id));
+        const pullExercises = allExercises.filter(ex => exerciseCategories.pull.includes(ex.id));
+
+        const shuffledPush = shuffleArray(pushExercises);
+        const shuffledPull = shuffleArray(pullExercises);
+
+        for (let i = 0; i < setCount && i < shuffledPush.length && i < shuffledPull.length; i++) {
+            supersets.push({
+                setNumber: i + 1,
+                exercise1: { ...shuffledPush[i], type: 'push' },
+                exercise2: { ...shuffledPull[i], type: 'pull' }
+            });
+        }
+    } else if (type === 'upper-lower') {
+        const upperMuscles = ['chest', 'back', 'shoulders', 'arms'];
+        const lowerMuscles = ['legs', 'core'];
+
+        const upperExercises = shuffleArray(allExercises.filter(ex => upperMuscles.includes(ex.muscle)));
+        const lowerExercises = shuffleArray(allExercises.filter(ex => lowerMuscles.includes(ex.muscle)));
+
+        for (let i = 0; i < setCount && i < upperExercises.length && i < lowerExercises.length; i++) {
+            supersets.push({
+                setNumber: i + 1,
+                exercise1: { ...upperExercises[i], type: 'upper' },
+                exercise2: { ...lowerExercises[i], type: 'lower' }
+            });
+        }
+    } else if (type === 'same-muscle') {
+        const muscles = ['chest', 'back', 'legs', 'shoulders', 'arms', 'core'];
+        const randomMuscle = muscles[Math.floor(Math.random() * muscles.length)];
+        const muscleExercises = shuffleArray(allExercises.filter(ex => ex.muscle === randomMuscle));
+
+        for (let i = 0; i < setCount * 2 && i + 1 < muscleExercises.length; i += 2) {
+            supersets.push({
+                setNumber: Math.floor(i / 2) + 1,
+                exercise1: muscleExercises[i],
+                exercise2: muscleExercises[i + 1],
+                muscle: randomMuscle
+            });
+        }
+    }
+
+    res.json({
+        type,
+        supersets,
+        totalSets: supersets.length,
+        restBetweenSupersets: '60-90 seconds'
+    });
+});
+
+/**
+ * GET /hiit
+ * Generate HIIT workout with intervals
+ * Query params:
+ *   - rounds: number of rounds (default: 4)
+ *   - work: work interval in seconds (default: 40)
+ *   - rest: rest interval in seconds (default: 20)
+ */
+app.get('/hiit', (req, res) => {
+    const { rounds = 4, work = 40, rest = 20 } = req.query;
+
+    const roundCount = Math.min(10, Math.max(1, parseInt(rounds) || 4));
+    const workTime = Math.min(120, Math.max(10, parseInt(work) || 40));
+    const restTime = Math.min(120, Math.max(5, parseInt(rest) || 20));
+
+    // HIIT-friendly exercises (bodyweight, explosive)
+    const hiitExercises = [
+        { name: 'Burpees', calories: 15 },
+        { name: 'Mountain Climbers', calories: 12 },
+        { name: 'Jump Squats', calories: 14 },
+        { name: 'High Knees', calories: 11 },
+        { name: 'Box Jumps', calories: 15 },
+        { name: 'Plank Jacks', calories: 10 },
+        { name: 'Jumping Lunges', calories: 14 },
+        { name: 'Tuck Jumps', calories: 16 },
+        { name: 'Speed Skaters', calories: 12 },
+        { name: 'Bicycle Crunches', calories: 8 }
+    ];
+
+    const shuffled = shuffleArray(hiitExercises);
+    const selectedExercises = shuffled.slice(0, roundCount);
+
+    const workout = selectedExercises.map((ex, i) => ({
+        round: i + 1,
+        exercise: ex.name,
+        workSeconds: workTime,
+        restSeconds: restTime,
+        estimatedCalories: Math.round(ex.calories * (workTime / 40))
+    }));
+
+    const totalTime = roundCount * (workTime + restTime);
+    const totalCalories = workout.reduce((sum, r) => sum + r.estimatedCalories, 0);
+
+    res.json({
+        workout,
+        summary: {
+            rounds: roundCount,
+            workInterval: `${workTime}s`,
+            restInterval: `${restTime}s`,
+            totalTime: `${Math.floor(totalTime / 60)}:${String(totalTime % 60).padStart(2, '0')}`,
+            estimatedCalories: totalCalories
+        }
+    });
+});
+
+/**
+ * GET /favorites
+ * List all favorite exercises
+ */
+app.get('/favorites', (req, res) => {
+    const allExercises = getAllExercises();
+    const favoriteExercises = allExercises.filter(ex => favorites.has(ex.id));
+
+    res.json({
+        favorites: favoriteExercises,
+        count: favoriteExercises.length
+    });
+});
+
+/**
+ * POST /favorites/:id
+ * Add exercise to favorites
+ */
+app.post('/favorites/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const exercise = getAllExercises().find(ex => ex.id === id);
+
+    if (!exercise) {
+        return res.status(404).json({ error: 'Exercise not found' });
+    }
+
+    if (favorites.has(id)) {
+        return res.status(400).json({ error: 'Exercise already in favorites' });
+    }
+
+    favorites.add(id);
+    res.status(201).json({
+        message: 'Added to favorites',
+        exercise
+    });
+});
+
+/**
+ * DELETE /favorites/:id
+ * Remove exercise from favorites
+ */
+app.delete('/favorites/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    if (!favorites.has(id)) {
+        return res.status(404).json({ error: 'Exercise not in favorites' });
+    }
+
+    favorites.delete(id);
+    res.json({ message: 'Removed from favorites', exerciseId: id });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Root endpoint
-app.get('/', (req, res) => {
+// Root endpoint (JSON API info)
+app.get('/api', (req, res) => {
     res.json({
         message: 'Welcome to the Workout Generator API',
-        version: '4.0.0',
+        version: '5.0.0',
+        documentation: '/',
         totalExercises: getAllExercises().length,
         customExercises: customExercises.length,
         muscleGroups: ['chest', 'back', 'legs', 'shoulders', 'arms', 'core'],
         endpoints: {
-            exercises: 'GET /exercises?muscle=chest&difficulty=beginner&page=1&limit=10',
-            randomExercise: 'GET /random-exercise?muscle=chest',
-            generateWorkout: 'GET /generate-workout?muscle=chest&difficulty=beginner&count=5',
-            workoutPlan: 'GET /workout-plan?difficulty=intermediate',
-            warmUp: 'GET /warm-up?type=upper&count=5',
-            addExercise: 'POST /exercises { name, muscle, difficulty, ... }',
-            deleteExercise: 'DELETE /exercises/:id',
-            health: 'GET /health'
+            core: {
+                exercises: 'GET /exercises',
+                exerciseById: 'GET /exercise/:id',
+                randomExercise: 'GET /random-exercise',
+                muscles: 'GET /muscles'
+            },
+            workouts: {
+                generateWorkout: 'GET /generate-workout',
+                workoutPlan: 'GET /workout-plan',
+                superset: 'GET /superset',
+                hiit: 'GET /hiit',
+                warmUp: 'GET /warm-up'
+            },
+            user: {
+                favorites: 'GET /favorites',
+                addFavorite: 'POST /favorites/:id',
+                removeFavorite: 'DELETE /favorites/:id',
+                addExercise: 'POST /exercises',
+                deleteExercise: 'DELETE /exercises/:id'
+            },
+            meta: {
+                stats: 'GET /stats',
+                health: 'GET /health'
+            }
         }
     });
 });

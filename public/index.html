@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Generator API</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 2rem;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .tagline { color: #94a3b8; font-size: 1.2rem; }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .stat {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-value { font-size: 2rem; font-weight: bold; color: #00ff88; }
+        .stat-label { color: #94a3b8; font-size: 0.9rem; }
+        .endpoints {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .endpoint {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .endpoint:hover {
+            border-color: #00ff88;
+            transform: translateY(-2px);
+        }
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .get { background: #22c55e; color: #000; }
+        .post { background: #3b82f6; color: #fff; }
+        .delete { background: #ef4444; color: #fff; }
+        .path { font-family: monospace; font-size: 1.1rem; color: #fff; }
+        .desc { color: #94a3b8; margin-top: 0.5rem; font-size: 0.95rem; }
+        .try-btn {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .try-btn:hover { background: #00ff88; color: #000; }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #64748b;
+        }
+        .category { margin-top: 2rem; }
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00d9ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💪 Workout Generator API</h1>
+            <p class="tagline">Generate personalized workouts with a simple REST API</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">35+</div>
+                <div class="stat-label">Exercises</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Muscle Groups</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">15+</div>
+                <div class="stat-label">Endpoints</div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">📋 Core Endpoints</h2>
+            <div class="endpoints">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/exercises</span>
+                    <p class="desc">List all exercises with pagination and filters</p>
+                    <a href="/exercises?limit=5" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/exercise/:id</span>
+                    <p class="desc">Get single exercise with categories</p>
+                    <a href="/exercise/1" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/random-exercise</span>
+                    <p class="desc">Get a random exercise</p>
+                    <a href="/random-exercise" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/muscles</span>
+                    <p class="desc">List all muscle groups with counts</p>
+                    <a href="/muscles" class="try-btn">Try it →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">🏋️ Workout Generators</h2>
+            <div class="endpoints">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/generate-workout</span>
+                    <p class="desc">Generate random workout by muscle/difficulty</p>
+                    <a href="/generate-workout?muscle=chest&count=3" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/workout-plan</span>
+                    <p class="desc">Generate weekly workout plan</p>
+                    <a href="/workout-plan?difficulty=intermediate" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/superset</span>
+                    <p class="desc">Generate superset pairs</p>
+                    <a href="/superset?type=push-pull&sets=3" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/hiit</span>
+                    <p class="desc">Generate HIIT workout with intervals</p>
+                    <a href="/hiit?rounds=4&work=40&rest=20" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/warm-up</span>
+                    <p class="desc">Generate warm-up routine</p>
+                    <a href="/warm-up?type=full&count=5" class="try-btn">Try it →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">⭐ User Features</h2>
+            <div class="endpoints">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/favorites</span>
+                    <p class="desc">List favorite exercises</p>
+                    <a href="/favorites" class="try-btn">Try it →</a>
+                </div>
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="path">/favorites/:id</span>
+                    <p class="desc">Add exercise to favorites</p>
+                </div>
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="path">/exercises</span>
+                    <p class="desc">Add custom exercise</p>
+                </div>
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/stats</span>
+                    <p class="desc">View API usage statistics</p>
+                    <a href="/stats" class="try-btn">Try it →</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with ❤️ using Node.js & Express</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://github.com/VineetLoke/workout-generator-api" style="color: #00ff88;">GitHub Repository</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
