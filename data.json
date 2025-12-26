@@ -1,0 +1,164 @@
+{
+    "exercises": [
+        {
+            "id": 1,
+            "name": "Barbell Bench Press",
+            "muscle": "chest",
+            "difficulty": "intermediate",
+            "description": "Lie on a flat bench and press a barbell up from chest level",
+            "equipment": "barbell, bench"
+        },
+        {
+            "id": 2,
+            "name": "Push-ups",
+            "muscle": "chest",
+            "difficulty": "beginner",
+            "description": "Classic bodyweight exercise performed in a plank position",
+            "equipment": "none"
+        },
+        {
+            "id": 3,
+            "name": "Dumbbell Flyes",
+            "muscle": "chest",
+            "difficulty": "intermediate",
+            "description": "Lie on a bench and bring dumbbells together in an arc motion",
+            "equipment": "dumbbells, bench"
+        },
+        {
+            "id": 4,
+            "name": "Incline Dumbbell Press",
+            "muscle": "chest",
+            "difficulty": "intermediate",
+            "description": "Press dumbbells on an incline bench to target upper chest",
+            "equipment": "dumbbells, incline bench"
+        },
+        {
+            "id": 5,
+            "name": "Cable Crossover",
+            "muscle": "chest",
+            "difficulty": "advanced",
+            "description": "Pull cables from high position across body in hugging motion",
+            "equipment": "cable machine"
+        },
+        {
+            "id": 6,
+            "name": "Decline Push-ups",
+            "muscle": "chest",
+            "difficulty": "intermediate",
+            "description": "Push-ups with feet elevated on a bench or platform",
+            "equipment": "bench"
+        },
+        {
+            "id": 7,
+            "name": "Chest Dips",
+            "muscle": "chest",
+            "difficulty": "advanced",
+            "description": "Dips with forward lean to emphasize chest activation",
+            "equipment": "dip bars"
+        },
+        {
+            "id": 8,
+            "name": "Pull-ups",
+            "muscle": "back",
+            "difficulty": "intermediate",
+            "description": "Hang from a bar and pull your body up until chin clears the bar",
+            "equipment": "pull-up bar"
+        },
+        {
+            "id": 9,
+            "name": "Barbell Rows",
+            "muscle": "back",
+            "difficulty": "intermediate",
+            "description": "Bend over and row a barbell to your lower chest",
+            "equipment": "barbell"
+        },
+        {
+            "id": 10,
+            "name": "Lat Pulldowns",
+            "muscle": "back",
+            "difficulty": "beginner",
+            "description": "Pull a cable bar down to chest level while seated",
+            "equipment": "cable machine"
+        },
+        {
+            "id": 11,
+            "name": "Dumbbell Rows",
+            "muscle": "back",
+            "difficulty": "beginner",
+            "description": "Single-arm rows with dumbbell, one knee on bench",
+            "equipment": "dumbbell, bench"
+        },
+        {
+            "id": 12,
+            "name": "Deadlifts",
+            "muscle": "back",
+            "difficulty": "advanced",
+            "description": "Lift a barbell from the ground to hip level with straight back",
+            "equipment": "barbell"
+        },
+        {
+            "id": 13,
+            "name": "Face Pulls",
+            "muscle": "back",
+            "difficulty": "beginner",
+            "description": "Pull rope attachment towards face, focusing on rear delts",
+            "equipment": "cable machine, rope"
+        },
+        {
+            "id": 14,
+            "name": "T-Bar Rows",
+            "muscle": "back",
+            "difficulty": "advanced",
+            "description": "Row using a T-bar machine or landmine attachment",
+            "equipment": "T-bar machine"
+        },
+        {
+            "id": 15,
+            "name": "Squats",
+            "muscle": "legs",
+            "difficulty": "intermediate",
+            "description": "Barbell back squat targeting quads, glutes, and hamstrings",
+            "equipment": "barbell, squat rack"
+        },
+        {
+            "id": 16,
+            "name": "Lunges",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Step forward into a lunge position, alternating legs",
+            "equipment": "none"
+        },
+        {
+            "id": 17,
+            "name": "Leg Press",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Push weight away using leg press machine",
+            "equipment": "leg press machine"
+        },
+        {
+            "id": 18,
+            "name": "Romanian Deadlifts",
+            "muscle": "legs",
+            "difficulty": "intermediate",
+            "description": "Hip hinge movement targeting hamstrings and glutes",
+            "equipment": "barbell"
+        },
+        {
+            "id": 19,
+            "name": "Leg Curls",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Curl weight using hamstring curl machine",
+            "equipment": "leg curl machine"
+        },
+        {
+            "id": 20,
+            "name": "Bulgarian Split Squats",
+            "muscle": "legs",
+            "difficulty": "advanced",
+            "description": "Single-leg squat with rear foot elevated on bench",
+            "equipment": "bench, dumbbells"
+        }
+    ]
+}
