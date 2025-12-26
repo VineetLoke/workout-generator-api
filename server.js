@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const data = require('./data.json');
 
 const app = express();
@@ -10,19 +11,22 @@ const PORT = process.env.PORT || 3000;
 let customExercises = [];
 let nextCustomId = 1000;
 let favorites = new Set();
+let workoutHistory = [];
+let requestLogs = [];
 let apiStats = {
     totalRequests: 0,
     endpointHits: {},
     popularExercises: {},
-    startTime: new Date().toISOString()
+    startTime: new Date().toISOString(),
+    rateLimitHits: 0
 };
 
 // Exercise categories
 const exerciseCategories = {
-    compound: [1, 4, 7, 8, 9, 12, 14, 15, 18, 20, 21, 25],
-    isolation: [2, 3, 5, 6, 10, 11, 13, 16, 17, 19, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
-    push: [1, 2, 3, 4, 5, 6, 7, 21, 23, 24, 25, 27, 29],
-    pull: [8, 9, 10, 11, 12, 13, 14, 26, 28, 30]
+    compound: [1, 4, 7, 8, 9, 12, 14, 15, 18, 20, 21, 25, 36, 40, 45, 48],
+    isolation: [2, 3, 5, 6, 10, 11, 13, 16, 17, 19, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 41, 42, 43, 44, 46, 47, 49, 50],
+    push: [1, 2, 3, 4, 5, 6, 7, 21, 23, 24, 25, 27, 29, 36, 37, 38],
+    pull: [8, 9, 10, 11, 12, 13, 14, 26, 28, 30, 40, 41, 42]
 };
 
 // Middleware
@@ -33,11 +37,81 @@ app.use(express.json());
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Stats tracking middleware
+// Rate limiting - 100 requests per 15 minutes
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: process.env.RATE_LIMIT || 100, // Limit each IP
+    message: {
+        error: 'Too many requests',
+        message: 'Rate limit exceeded. Please try again later.',
+        retryAfter: '15 minutes'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res, next, options) => {
+        apiStats.rateLimitHits++;
+        res.status(options.statusCode).json(options.message);
+    }
+});
+app.use('/api', limiter);
+app.use('/exercises', limiter);
+app.use('/exercise', limiter);
+app.use('/generate-workout', limiter);
+app.use('/workout-plan', limiter);
+app.use('/superset', limiter);
+app.use('/hiit', limiter);
+
+// API Key validation middleware (optional - for RapidAPI)
+const validateApiKey = (req, res, next) => {
+    // RapidAPI sends key in X-RapidAPI-Key header
+    // For direct access, check X-API-Key header
+    const rapidApiKey = req.headers['x-rapidapi-key'];
+    const directApiKey = req.headers['x-api-key'];
+    const expectedKey = process.env.API_KEY;
+
+    // Skip validation if no API_KEY is set in env (development mode)
+    if (!expectedKey) {
+        return next();
+    }
+
+    // RapidAPI handles its own auth, so allow those requests
+    if (rapidApiKey) {
+        return next();
+    }
+
+    // For direct access, validate API key
+    if (directApiKey !== expectedKey) {
+        return res.status(401).json({
+            error: 'Unauthorized',
+            message: 'Invalid or missing API key. Include X-API-Key header.'
+        });
+    }
+
+    next();
+};
+
+// Request logging middleware
 app.use((req, res, next) => {
+    const logEntry = {
+        timestamp: new Date().toISOString(),
+        method: req.method,
+        path: req.path,
+        query: req.query,
+        ip: req.ip || req.connection.remoteAddress,
+        userAgent: req.headers['user-agent']?.substring(0, 50)
+    };
+
+    // Keep last 1000 logs
+    requestLogs.push(logEntry);
+    if (requestLogs.length > 1000) {
+        requestLogs.shift();
+    }
+
+    // Update stats
     apiStats.totalRequests++;
     const endpoint = req.path;
     apiStats.endpointHits[endpoint] = (apiStats.endpointHits[endpoint] || 0) + 1;
+
     next();
 });
 
@@ -710,6 +784,80 @@ app.delete('/favorites/:id', (req, res) => {
 
     favorites.delete(id);
     res.json({ message: 'Removed from favorites', exerciseId: id });
+});
+
+/**
+ * GET /history
+ * Get workout history
+ */
+app.get('/history', (req, res) => {
+    const { limit = 10 } = req.query;
+    const limitNum = Math.min(50, Math.max(1, parseInt(limit) || 10));
+
+    res.json({
+        history: workoutHistory.slice(-limitNum).reverse(),
+        totalWorkouts: workoutHistory.length
+    });
+});
+
+/**
+ * POST /history
+ * Save a workout to history
+ */
+app.post('/history', (req, res) => {
+    const { exercises, workoutType, duration, notes } = req.body;
+
+    if (!exercises || !Array.isArray(exercises)) {
+        return res.status(400).json({
+            error: 'Missing required field: exercises (array)'
+        });
+    }
+
+    const historyEntry = {
+        id: workoutHistory.length + 1,
+        timestamp: new Date().toISOString(),
+        workoutType: workoutType || 'custom',
+        exercises: exercises,
+        exerciseCount: exercises.length,
+        duration: duration || null,
+        notes: notes || '',
+        estimatedCalories: exercises.reduce((sum, ex) => sum + (ex.calories || 0), 0)
+    };
+
+    // Keep last 100 workouts
+    workoutHistory.push(historyEntry);
+    if (workoutHistory.length > 100) {
+        workoutHistory.shift();
+    }
+
+    res.status(201).json({
+        message: 'Workout saved to history',
+        workout: historyEntry
+    });
+});
+
+/**
+ * DELETE /history
+ * Clear workout history
+ */
+app.delete('/history', (req, res) => {
+    const count = workoutHistory.length;
+    workoutHistory = [];
+    res.json({ message: 'History cleared', deletedCount: count });
+});
+
+/**
+ * GET /logs
+ * Get recent request logs (admin endpoint)
+ */
+app.get('/logs', (req, res) => {
+    const { limit = 50 } = req.query;
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 50));
+
+    res.json({
+        logs: requestLogs.slice(-limitNum).reverse(),
+        totalLogs: requestLogs.length
+    });
 });
 
 // Health check endpoint
