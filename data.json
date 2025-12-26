@@ -6,7 +6,11 @@
             "muscle": "chest",
             "difficulty": "intermediate",
             "description": "Lie on a flat bench and press a barbell up from chest level",
-            "equipment": "barbell, bench"
+            "equipment": "barbell, bench",
+            "sets": 4,
+            "reps": "8-10",
+            "duration": 45,
+            "calories": 50
         },
         {
             "id": 2,
@@ -14,7 +18,11 @@
             "muscle": "chest",
             "difficulty": "beginner",
             "description": "Classic bodyweight exercise performed in a plank position",
-            "equipment": "none"
+            "equipment": "none",
+            "sets": 3,
+            "reps": "10-15",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 3,
@@ -22,7 +30,11 @@
             "muscle": "chest",
             "difficulty": "intermediate",
             "description": "Lie on a bench and bring dumbbells together in an arc motion",
-            "equipment": "dumbbells, bench"
+            "equipment": "dumbbells, bench",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 35,
+            "calories": 35
         },
         {
             "id": 4,
@@ -30,7 +42,11 @@
             "muscle": "chest",
             "difficulty": "intermediate",
             "description": "Press dumbbells on an incline bench to target upper chest",
-            "equipment": "dumbbells, incline bench"
+            "equipment": "dumbbells, incline bench",
+            "sets": 4,
+            "reps": "8-10",
+            "duration": 40,
+            "calories": 45
         },
         {
             "id": 5,
@@ -38,7 +54,11 @@
             "muscle": "chest",
             "difficulty": "advanced",
             "description": "Pull cables from high position across body in hugging motion",
-            "equipment": "cable machine"
+            "equipment": "cable machine",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 35,
+            "calories": 30
         },
         {
             "id": 6,
@@ -46,7 +66,11 @@
             "muscle": "chest",
             "difficulty": "intermediate",
             "description": "Push-ups with feet elevated on a bench or platform",
-            "equipment": "bench"
+            "equipment": "bench",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 30
         },
         {
             "id": 7,
@@ -54,7 +78,11 @@
             "muscle": "chest",
             "difficulty": "advanced",
             "description": "Dips with forward lean to emphasize chest activation",
-            "equipment": "dip bars"
+            "equipment": "dip bars",
+            "sets": 3,
+            "reps": "8-12",
+            "duration": 35,
+            "calories": 40
         },
         {
             "id": 8,
@@ -62,7 +90,11 @@
             "muscle": "back",
             "difficulty": "intermediate",
             "description": "Hang from a bar and pull your body up until chin clears the bar",
-            "equipment": "pull-up bar"
+            "equipment": "pull-up bar",
+            "sets": 4,
+            "reps": "6-10",
+            "duration": 40,
+            "calories": 45
         },
         {
             "id": 9,
@@ -70,7 +102,11 @@
             "muscle": "back",
             "difficulty": "intermediate",
             "description": "Bend over and row a barbell to your lower chest",
-            "equipment": "barbell"
+            "equipment": "barbell",
+            "sets": 4,
+            "reps": "8-10",
+            "duration": 40,
+            "calories": 50
         },
         {
             "id": 10,
@@ -78,7 +114,11 @@
             "muscle": "back",
             "difficulty": "beginner",
             "description": "Pull a cable bar down to chest level while seated",
-            "equipment": "cable machine"
+            "equipment": "cable machine",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 35,
+            "calories": 35
         },
         {
             "id": 11,
@@ -86,7 +126,11 @@
             "muscle": "back",
             "difficulty": "beginner",
             "description": "Single-arm rows with dumbbell, one knee on bench",
-            "equipment": "dumbbell, bench"
+            "equipment": "dumbbell, bench",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 35,
+            "calories": 35
         },
         {
             "id": 12,
@@ -94,7 +138,11 @@
             "muscle": "back",
             "difficulty": "advanced",
             "description": "Lift a barbell from the ground to hip level with straight back",
-            "equipment": "barbell"
+            "equipment": "barbell",
+            "sets": 4,
+            "reps": "5-8",
+            "duration": 50,
+            "calories": 70
         },
         {
             "id": 13,
@@ -102,7 +150,11 @@
             "muscle": "back",
             "difficulty": "beginner",
             "description": "Pull rope attachment towards face, focusing on rear delts",
-            "equipment": "cable machine, rope"
+            "equipment": "cable machine, rope",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 14,
@@ -110,7 +162,11 @@
             "muscle": "back",
             "difficulty": "advanced",
             "description": "Row using a T-bar machine or landmine attachment",
-            "equipment": "T-bar machine"
+            "equipment": "T-bar machine",
+            "sets": 4,
+            "reps": "8-10",
+            "duration": 40,
+            "calories": 50
         },
         {
             "id": 15,
@@ -118,7 +174,11 @@
             "muscle": "legs",
             "difficulty": "intermediate",
             "description": "Barbell back squat targeting quads, glutes, and hamstrings",
-            "equipment": "barbell, squat rack"
+            "equipment": "barbell, squat rack",
+            "sets": 4,
+            "reps": "8-10",
+            "duration": 50,
+            "calories": 60
         },
         {
             "id": 16,
@@ -126,7 +186,11 @@
             "muscle": "legs",
             "difficulty": "beginner",
             "description": "Step forward into a lunge position, alternating legs",
-            "equipment": "none"
+            "equipment": "none",
+            "sets": 3,
+            "reps": "10-12 each",
+            "duration": 35,
+            "calories": 40
         },
         {
             "id": 17,
@@ -134,7 +198,11 @@
             "muscle": "legs",
             "difficulty": "beginner",
             "description": "Push weight away using leg press machine",
-            "equipment": "leg press machine"
+            "equipment": "leg press machine",
+            "sets": 4,
+            "reps": "10-12",
+            "duration": 40,
+            "calories": 45
         },
         {
             "id": 18,
@@ -142,7 +210,11 @@
             "muscle": "legs",
             "difficulty": "intermediate",
             "description": "Hip hinge movement targeting hamstrings and glutes",
-            "equipment": "barbell"
+            "equipment": "barbell",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 40,
+            "calories": 50
         },
         {
             "id": 19,
@@ -150,7 +222,11 @@
             "muscle": "legs",
             "difficulty": "beginner",
             "description": "Curl weight using hamstring curl machine",
-            "equipment": "leg curl machine"
+            "equipment": "leg curl machine",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 20,
@@ -158,7 +234,11 @@
             "muscle": "legs",
             "difficulty": "advanced",
             "description": "Single-leg squat with rear foot elevated on bench",
-            "equipment": "bench, dumbbells"
+            "equipment": "bench, dumbbells",
+            "sets": 3,
+            "reps": "8-10 each",
+            "duration": 40,
+            "calories": 50
         },
         {
             "id": 21,
@@ -166,7 +246,11 @@
             "muscle": "shoulders",
             "difficulty": "intermediate",
             "description": "Press a barbell overhead from shoulder level",
-            "equipment": "barbell"
+            "equipment": "barbell",
+            "sets": 4,
+            "reps": "8-10",
+            "duration": 40,
+            "calories": 45
         },
         {
             "id": 22,
@@ -174,7 +258,11 @@
             "muscle": "shoulders",
             "difficulty": "beginner",
             "description": "Raise dumbbells out to the sides until parallel with floor",
-            "equipment": "dumbbells"
+            "equipment": "dumbbells",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 23,
@@ -182,7 +270,11 @@
             "muscle": "shoulders",
             "difficulty": "intermediate",
             "description": "Rotating dumbbell press named after Arnold Schwarzenegger",
-            "equipment": "dumbbells"
+            "equipment": "dumbbells",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 35,
+            "calories": 35
         },
         {
             "id": 24,
@@ -190,7 +282,11 @@
             "muscle": "shoulders",
             "difficulty": "beginner",
             "description": "Raise dumbbells in front of body to shoulder height",
-            "equipment": "dumbbells"
+            "equipment": "dumbbells",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 25,
@@ -198,7 +294,11 @@
             "muscle": "shoulders",
             "difficulty": "advanced",
             "description": "Push-ups performed in a handstand position against wall",
-            "equipment": "none"
+            "equipment": "none",
+            "sets": 3,
+            "reps": "5-8",
+            "duration": 35,
+            "calories": 40
         },
         {
             "id": 26,
@@ -206,7 +306,11 @@
             "muscle": "arms",
             "difficulty": "beginner",
             "description": "Curl dumbbells from hips to shoulders",
-            "equipment": "dumbbells"
+            "equipment": "dumbbells",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 25,
+            "calories": 20
         },
         {
             "id": 27,
@@ -214,7 +318,11 @@
             "muscle": "arms",
             "difficulty": "beginner",
             "description": "Dips on a bench or parallel bars targeting triceps",
-            "equipment": "bench"
+            "equipment": "bench",
+            "sets": 3,
+            "reps": "10-15",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 28,
@@ -222,7 +330,11 @@
             "muscle": "arms",
             "difficulty": "beginner",
             "description": "Curls with neutral grip targeting brachialis",
-            "equipment": "dumbbells"
+            "equipment": "dumbbells",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 25,
+            "calories": 20
         },
         {
             "id": 29,
@@ -230,7 +342,11 @@
             "muscle": "arms",
             "difficulty": "intermediate",
             "description": "Lying tricep extension with EZ bar or dumbbells",
-            "equipment": "EZ bar, bench"
+            "equipment": "EZ bar, bench",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 30,
@@ -238,7 +354,11 @@
             "muscle": "arms",
             "difficulty": "intermediate",
             "description": "Bicep curls performed on a preacher bench",
-            "equipment": "preacher bench, barbell"
+            "equipment": "preacher bench, barbell",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 31,
@@ -246,7 +366,11 @@
             "muscle": "core",
             "difficulty": "beginner",
             "description": "Hold body in straight line supported on forearms and toes",
-            "equipment": "none"
+            "equipment": "none",
+            "sets": 3,
+            "reps": "30-60 sec",
+            "duration": 25,
+            "calories": 15
         },
         {
             "id": 32,
@@ -254,7 +378,11 @@
             "muscle": "core",
             "difficulty": "beginner",
             "description": "Seated twist holding weight, alternating sides",
-            "equipment": "dumbbell"
+            "equipment": "dumbbell",
+            "sets": 3,
+            "reps": "20 total",
+            "duration": 25,
+            "calories": 20
         },
         {
             "id": 33,
@@ -262,7 +390,11 @@
             "muscle": "core",
             "difficulty": "advanced",
             "description": "Raise legs while hanging from a pull-up bar",
-            "equipment": "pull-up bar"
+            "equipment": "pull-up bar",
+            "sets": 3,
+            "reps": "10-15",
+            "duration": 30,
+            "calories": 30
         },
         {
             "id": 34,
@@ -270,7 +402,11 @@
             "muscle": "core",
             "difficulty": "intermediate",
             "description": "Roll ab wheel out and back while maintaining plank",
-            "equipment": "ab wheel"
+            "equipment": "ab wheel",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 25
         },
         {
             "id": 35,
@@ -278,7 +414,109 @@
             "muscle": "core",
             "difficulty": "beginner",
             "description": "Lie on back and alternate extending opposite arm and leg",
-            "equipment": "none"
+            "equipment": "none",
+            "sets": 3,
+            "reps": "10 each side",
+            "duration": 25,
+            "calories": 15
+        }
+    ],
+    "warmups": [
+        {
+            "id": 1,
+            "name": "Jumping Jacks",
+            "type": "cardio",
+            "duration": 60,
+            "description": "Jump while spreading arms and legs, then return to standing",
+            "calories": 10
+        },
+        {
+            "id": 2,
+            "name": "Arm Circles",
+            "type": "upper",
+            "duration": 30,
+            "description": "Rotate arms in circles, both forward and backward",
+            "calories": 5
+        },
+        {
+            "id": 3,
+            "name": "Leg Swings",
+            "type": "lower",
+            "duration": 30,
+            "description": "Swing each leg forward and backward while holding support",
+            "calories": 5
+        },
+        {
+            "id": 4,
+            "name": "High Knees",
+            "type": "cardio",
+            "duration": 45,
+            "description": "Run in place bringing knees up high",
+            "calories": 12
+        },
+        {
+            "id": 5,
+            "name": "Hip Circles",
+            "type": "lower",
+            "duration": 30,
+            "description": "Rotate hips in circles, both directions",
+            "calories": 5
+        },
+        {
+            "id": 6,
+            "name": "Shoulder Rolls",
+            "type": "upper",
+            "duration": 20,
+            "description": "Roll shoulders forward and backward",
+            "calories": 3
+        },
+        {
+            "id": 7,
+            "name": "Bodyweight Squats",
+            "type": "lower",
+            "duration": 45,
+            "description": "Perform squats with no weight to warm up legs",
+            "calories": 8
+        },
+        {
+            "id": 8,
+            "name": "Butt Kicks",
+            "type": "cardio",
+            "duration": 45,
+            "description": "Run in place kicking heels to glutes",
+            "calories": 10
+        },
+        {
+            "id": 9,
+            "name": "Torso Twists",
+            "type": "core",
+            "duration": 30,
+            "description": "Stand and rotate torso side to side",
+            "calories": 5
+        },
+        {
+            "id": 10,
+            "name": "Neck Rolls",
+            "type": "upper",
+            "duration": 20,
+            "description": "Gently roll head in circles",
+            "calories": 2
+        },
+        {
+            "id": 11,
+            "name": "Walking Lunges",
+            "type": "lower",
+            "duration": 45,
+            "description": "Perform lunges while walking forward",
+            "calories": 10
+        },
+        {
+            "id": 12,
+            "name": "Cat-Cow Stretch",
+            "type": "core",
+            "duration": 30,
+            "description": "Alternate between arching and rounding spine on all fours",
+            "calories": 5
         }
     ]
 }

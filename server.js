@@ -6,6 +6,10 @@ const data = require('./data.json');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// In-memory storage for custom exercises
+let customExercises = [];
+let nextCustomId = 1000;
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -20,6 +24,13 @@ function shuffleArray(array) {
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
+}
+
+/**
+ * Get all exercises (built-in + custom)
+ */
+function getAllExercises() {
+    return [...data.exercises, ...customExercises];
 }
 
 /**
@@ -243,6 +254,169 @@ app.get('/workout-plan', (req, res) => {
     });
 });
 
+/**
+ * GET /warm-up
+ * Query params:
+ *   - type: upper | lower | cardio | core | full (default: full)
+ *   - count: number of warm-up exercises (default: 5)
+ * Returns warm-up routine
+ */
+app.get('/warm-up', (req, res) => {
+    const { type = 'full', count = 5 } = req.query;
+
+    const validTypes = ['upper', 'lower', 'cardio', 'core', 'full'];
+    if (!validTypes.includes(type.toLowerCase())) {
+        return res.status(400).json({
+            error: 'Invalid type parameter',
+            validOptions: validTypes
+        });
+    }
+
+    let warmups = data.warmups || [];
+
+    // Filter by type (or get all for 'full')
+    if (type.toLowerCase() !== 'full') {
+        warmups = warmups.filter(w => w.type === type.toLowerCase());
+    }
+
+    // Shuffle and pick
+    const exerciseCount = Math.min(warmups.length, Math.max(1, parseInt(count) || 5));
+    const shuffled = shuffleArray(warmups);
+    const routine = shuffled.slice(0, exerciseCount);
+
+    // Calculate totals
+    const totalDuration = routine.reduce((sum, w) => sum + w.duration, 0);
+    const totalCalories = routine.reduce((sum, w) => sum + w.calories, 0);
+
+    res.json({
+        warmup: routine,
+        count: routine.length,
+        totalDuration: `${Math.floor(totalDuration / 60)}:${String(totalDuration % 60).padStart(2, '0')} min`,
+        totalCalories,
+        type: type.toLowerCase()
+    });
+});
+
+/**
+ * GET /random-exercise
+ * Query params:
+ *   - muscle: filter by muscle group (optional)
+ *   - difficulty: filter by difficulty (optional)
+ * Returns a single random exercise
+ */
+app.get('/random-exercise', (req, res) => {
+    const { muscle, difficulty } = req.query;
+
+    let exercises = getAllExercises();
+
+    if (muscle) {
+        exercises = exercises.filter(
+            ex => ex.muscle.toLowerCase() === muscle.toLowerCase()
+        );
+    }
+
+    if (difficulty) {
+        exercises = exercises.filter(
+            ex => ex.difficulty.toLowerCase() === difficulty.toLowerCase()
+        );
+    }
+
+    if (exercises.length === 0) {
+        return res.status(404).json({
+            error: 'No exercises found matching your criteria'
+        });
+    }
+
+    const randomIndex = Math.floor(Math.random() * exercises.length);
+    res.json({ exercise: exercises[randomIndex] });
+});
+
+/**
+ * POST /exercises
+ * Add a custom exercise
+ * Body: { name, muscle, difficulty, description, equipment, sets, reps, duration, calories }
+ */
+app.post('/exercises', (req, res) => {
+    const { name, muscle, difficulty, description, equipment } = req.body;
+
+    // Validate required fields
+    if (!name || !muscle || !difficulty) {
+        return res.status(400).json({
+            error: 'Missing required fields',
+            required: ['name', 'muscle', 'difficulty']
+        });
+    }
+
+    // Validate muscle
+    const validMuscles = ['chest', 'back', 'legs', 'shoulders', 'arms', 'core'];
+    if (!validMuscles.includes(muscle.toLowerCase())) {
+        return res.status(400).json({
+            error: 'Invalid muscle parameter',
+            validOptions: validMuscles
+        });
+    }
+
+    // Validate difficulty
+    const validDifficulties = ['beginner', 'intermediate', 'advanced'];
+    if (!validDifficulties.includes(difficulty.toLowerCase())) {
+        return res.status(400).json({
+            error: 'Invalid difficulty parameter',
+            validOptions: validDifficulties
+        });
+    }
+
+    // Create new exercise
+    const newExercise = {
+        id: nextCustomId++,
+        name,
+        muscle: muscle.toLowerCase(),
+        difficulty: difficulty.toLowerCase(),
+        description: description || '',
+        equipment: equipment || 'none',
+        sets: req.body.sets || 3,
+        reps: req.body.reps || '10-12',
+        duration: req.body.duration || 30,
+        calories: req.body.calories || 25,
+        custom: true
+    };
+
+    customExercises.push(newExercise);
+
+    res.status(201).json({
+        message: 'Exercise created successfully',
+        exercise: newExercise
+    });
+});
+
+/**
+ * DELETE /exercises/:id
+ * Delete a custom exercise by ID
+ */
+app.delete('/exercises/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    // Check if it's a built-in exercise
+    if (id < 1000) {
+        return res.status(403).json({
+            error: 'Cannot delete built-in exercises'
+        });
+    }
+
+    const index = customExercises.findIndex(ex => ex.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({
+            error: 'Custom exercise not found'
+        });
+    }
+
+    const deleted = customExercises.splice(index, 1)[0];
+    res.json({
+        message: 'Exercise deleted successfully',
+        exercise: deleted
+    });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -252,13 +426,18 @@ app.get('/health', (req, res) => {
 app.get('/', (req, res) => {
     res.json({
         message: 'Welcome to the Workout Generator API',
-        version: '3.0.0',
-        totalExercises: data.exercises.length,
+        version: '4.0.0',
+        totalExercises: getAllExercises().length,
+        customExercises: customExercises.length,
         muscleGroups: ['chest', 'back', 'legs', 'shoulders', 'arms', 'core'],
         endpoints: {
-            exercises: 'GET /exercises?muscle=chest&difficulty=beginner&equipment=dumbbells&page=1&limit=10',
+            exercises: 'GET /exercises?muscle=chest&difficulty=beginner&page=1&limit=10',
+            randomExercise: 'GET /random-exercise?muscle=chest',
             generateWorkout: 'GET /generate-workout?muscle=chest&difficulty=beginner&count=5',
             workoutPlan: 'GET /workout-plan?difficulty=intermediate',
+            warmUp: 'GET /warm-up?type=upper&count=5',
+            addExercise: 'POST /exercises { name, muscle, difficulty, ... }',
+            deleteExercise: 'DELETE /exercises/:id',
             health: 'GET /health'
         }
     });
