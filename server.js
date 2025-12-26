@@ -860,6 +860,78 @@ app.get('/logs', (req, res) => {
     });
 });
 
+/**
+ * GET /stretches
+ * Get stretching/cooldown routine
+ * Query params:
+ *   - targetArea: legs | upper | arms | back | hips | core | all (default: all)
+ *   - count: number of stretches (default: 5)
+ */
+app.get('/stretches', (req, res) => {
+    const { targetArea = 'all', count = 5 } = req.query;
+
+    let stretches = data.stretches || [];
+
+    if (targetArea !== 'all') {
+        stretches = stretches.filter(s => s.targetArea === targetArea.toLowerCase());
+    }
+
+    const stretchCount = Math.min(stretches.length, Math.max(1, parseInt(count) || 5));
+    const shuffled = shuffleArray(stretches);
+    const routine = shuffled.slice(0, stretchCount);
+
+    const totalDuration = routine.reduce((sum, s) => sum + s.duration, 0);
+
+    res.json({
+        stretches: routine,
+        count: routine.length,
+        totalDuration: `${Math.floor(totalDuration / 60)}:${String(totalDuration % 60).padStart(2, '0')} min`,
+        targetArea: targetArea.toLowerCase()
+    });
+});
+
+/**
+ * GET /nutrition
+ * Get nutrition tips
+ * Query params:
+ *   - category: pre-workout | post-workout | hydration | muscle-building | fat-loss | protein | recovery | supplements | all (default: all)
+ */
+app.get('/nutrition', (req, res) => {
+    const { category = 'all' } = req.query;
+
+    let tips = data.nutritionTips || [];
+
+    if (category !== 'all') {
+        tips = tips.filter(t => t.category === category.toLowerCase());
+    }
+
+    res.json({
+        tips,
+        count: tips.length,
+        categories: ['pre-workout', 'post-workout', 'hydration', 'muscle-building', 'fat-loss', 'protein', 'recovery', 'supplements']
+    });
+});
+
+/**
+ * GET /cooldown
+ * Generate complete cooldown routine (stretches + tips)
+ */
+app.get('/cooldown', (req, res) => {
+    const stretches = shuffleArray(data.stretches || []).slice(0, 5);
+    const tips = shuffleArray(data.nutritionTips || []).slice(0, 2);
+
+    const totalDuration = stretches.reduce((sum, s) => sum + s.duration, 0);
+
+    res.json({
+        cooldown: {
+            stretches,
+            nutritionTips: tips
+        },
+        totalDuration: `${Math.floor(totalDuration / 60)}:${String(totalDuration % 60).padStart(2, '0')} min`,
+        message: "Great workout! Remember to hydrate and refuel."
+    });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });

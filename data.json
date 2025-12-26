@@ -599,6 +599,803 @@
             "reps": "20 each side",
             "duration": 30,
             "calories": 35
+        },
+        {
+            "id": 51,
+            "name": "Landmine Press",
+            "muscle": "chest",
+            "difficulty": "intermediate",
+            "description": "Press barbell anchored in landmine attachment overhead",
+            "equipment": "barbell, landmine",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 35,
+            "calories": 35
+        },
+        {
+            "id": 52,
+            "name": "Svend Press",
+            "muscle": "chest",
+            "difficulty": "beginner",
+            "description": "Press weight plates together in front of chest",
+            "equipment": "weight plates",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 53,
+            "name": "Single-Arm Dumbbell Row",
+            "muscle": "back",
+            "difficulty": "beginner",
+            "description": "Row dumbbell to hip while bracing on bench",
+            "equipment": "dumbbell, bench",
+            "sets": 3,
+            "reps": "10-12 each",
+            "duration": 35,
+            "calories": 30
+        },
+        {
+            "id": 54,
+            "name": "Meadows Row",
+            "muscle": "back",
+            "difficulty": "advanced",
+            "description": "Landmine row variation targeting lats",
+            "equipment": "barbell, landmine",
+            "sets": 3,
+            "reps": "8-10 each",
+            "duration": 35,
+            "calories": 35
+        },
+        {
+            "id": 55,
+            "name": "Inverted Rows",
+            "muscle": "back",
+            "difficulty": "beginner",
+            "description": "Row body up to bar while hanging underneath",
+            "equipment": "barbell, squat rack",
+            "sets": 3,
+            "reps": "10-15",
+            "duration": 30,
+            "calories": 25
+        },
+        {
+            "id": 56,
+            "name": "Hack Squat",
+            "muscle": "legs",
+            "difficulty": "intermediate",
+            "description": "Squat using hack squat machine",
+            "equipment": "hack squat machine",
+            "sets": 4,
+            "reps": "10-12",
+            "duration": 40,
+            "calories": 50
+        },
+        {
+            "id": 57,
+            "name": "Sissy Squat",
+            "muscle": "legs",
+            "difficulty": "advanced",
+            "description": "Lean back while squatting to isolate quads",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 30
+        },
+        {
+            "id": 58,
+            "name": "Good Mornings",
+            "muscle": "legs",
+            "difficulty": "intermediate",
+            "description": "Hinge at hips with barbell on back",
+            "equipment": "barbell",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 35,
+            "calories": 35
+        },
+        {
+            "id": 59,
+            "name": "Nordic Curl",
+            "muscle": "legs",
+            "difficulty": "advanced",
+            "description": "Lower body forward using hamstring strength",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "5-8",
+            "duration": 30,
+            "calories": 30
+        },
+        {
+            "id": 60,
+            "name": "Step-ups",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Step up onto elevated platform alternating legs",
+            "equipment": "bench",
+            "sets": 3,
+            "reps": "12 each",
+            "duration": 35,
+            "calories": 35
+        },
+        {
+            "id": 61,
+            "name": "Z Press",
+            "muscle": "shoulders",
+            "difficulty": "advanced",
+            "description": "Seated overhead press without back support",
+            "equipment": "barbell",
+            "sets": 3,
+            "reps": "8-10",
+            "duration": 35,
+            "calories": 35
+        },
+        {
+            "id": 62,
+            "name": "Cable Lateral Raise",
+            "muscle": "shoulders",
+            "difficulty": "beginner",
+            "description": "Lateral raise using cable for constant tension",
+            "equipment": "cable machine",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 63,
+            "name": "Face Pull",
+            "muscle": "shoulders",
+            "difficulty": "beginner",
+            "description": "Pull rope to face focusing on rear delts",
+            "equipment": "cable machine, rope",
+            "sets": 3,
+            "reps": "15-20",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 64,
+            "name": "Lu Raises",
+            "muscle": "shoulders",
+            "difficulty": "intermediate",
+            "description": "Front raise with external rotation at top",
+            "equipment": "dumbbells",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 25
+        },
+        {
+            "id": 65,
+            "name": "Barbell Curl",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Curl barbell from hips to shoulders",
+            "equipment": "barbell",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 66,
+            "name": "Cable Curl",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Curl using cable for constant tension",
+            "equipment": "cable machine",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 67,
+            "name": "Overhead Tricep Extension",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Extend dumbbell overhead behind head",
+            "equipment": "dumbbell",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 68,
+            "name": "Diamond Dips",
+            "muscle": "arms",
+            "difficulty": "intermediate",
+            "description": "Dips with narrow hand position for triceps",
+            "equipment": "dip bars",
+            "sets": 3,
+            "reps": "8-12",
+            "duration": 30,
+            "calories": 30
+        },
+        {
+            "id": 69,
+            "name": "Wrist Curls",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Curl wrists up with forearms on bench",
+            "equipment": "barbell, bench",
+            "sets": 3,
+            "reps": "15-20",
+            "duration": 20,
+            "calories": 15
+        },
+        {
+            "id": 70,
+            "name": "Cable Crunch",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Crunch down using cable resistance",
+            "equipment": "cable machine, rope",
+            "sets": 3,
+            "reps": "15-20",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 71,
+            "name": "Pallof Press",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Press cable out from chest resisting rotation",
+            "equipment": "cable machine",
+            "sets": 3,
+            "reps": "10-12 each",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 72,
+            "name": "Dragon Flag",
+            "muscle": "core",
+            "difficulty": "advanced",
+            "description": "Lower straight body from shoulders on bench",
+            "equipment": "bench",
+            "sets": 3,
+            "reps": "5-8",
+            "duration": 30,
+            "calories": 30
+        },
+        {
+            "id": 73,
+            "name": "Hollow Body Hold",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Lie on back with arms and legs extended off floor",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "30-45 sec",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 74,
+            "name": "Woodchoppers",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Rotate torso while pulling cable diagonally",
+            "equipment": "cable machine",
+            "sets": 3,
+            "reps": "12 each",
+            "duration": 30,
+            "calories": 25
+        },
+        {
+            "id": 75,
+            "name": "Dumbbell Pullover",
+            "muscle": "chest",
+            "difficulty": "intermediate",
+            "description": "Lower dumbbell behind head while lying on bench",
+            "equipment": "dumbbell, bench",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 30
+        },
+        {
+            "id": 76,
+            "name": "Farmer's Walk",
+            "muscle": "back",
+            "difficulty": "beginner",
+            "description": "Walk while carrying heavy weights at sides",
+            "equipment": "dumbbells",
+            "sets": 3,
+            "reps": "40m",
+            "duration": 45,
+            "calories": 40
+        },
+        {
+            "id": 77,
+            "name": "Trap Bar Deadlift",
+            "muscle": "legs",
+            "difficulty": "intermediate",
+            "description": "Deadlift using hexagonal trap bar",
+            "equipment": "trap bar",
+            "sets": 4,
+            "reps": "6-8",
+            "duration": 50,
+            "calories": 60
+        },
+        {
+            "id": 78,
+            "name": "Goblet Squat",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Squat while holding dumbbell at chest",
+            "equipment": "dumbbell",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 35,
+            "calories": 35
+        },
+        {
+            "id": 79,
+            "name": "Pistol Squat",
+            "muscle": "legs",
+            "difficulty": "advanced",
+            "description": "Single-leg squat with other leg extended",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "5-8 each",
+            "duration": 35,
+            "calories": 40
+        },
+        {
+            "id": 80,
+            "name": "Sumo Deadlift",
+            "muscle": "legs",
+            "difficulty": "intermediate",
+            "description": "Deadlift with wide stance and hands inside legs",
+            "equipment": "barbell",
+            "sets": 4,
+            "reps": "6-8",
+            "duration": 50,
+            "calories": 60
+        },
+        {
+            "id": 81,
+            "name": "Glute Bridge",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Raise hips while lying on back",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "15-20",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 82,
+            "name": "Leg Extension",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Extend legs using leg extension machine",
+            "equipment": "leg extension machine",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 25
+        },
+        {
+            "id": 83,
+            "name": "Seated Calf Raise",
+            "muscle": "legs",
+            "difficulty": "beginner",
+            "description": "Raise calves while seated with weight on knees",
+            "equipment": "seated calf machine",
+            "sets": 4,
+            "reps": "15-20",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 84,
+            "name": "Machine Shoulder Press",
+            "muscle": "shoulders",
+            "difficulty": "beginner",
+            "description": "Press overhead using shoulder press machine",
+            "equipment": "shoulder press machine",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 30,
+            "calories": 30
+        },
+        {
+            "id": 85,
+            "name": "Incline Curl",
+            "muscle": "arms",
+            "difficulty": "intermediate",
+            "description": "Curl dumbbells while seated on incline bench",
+            "equipment": "dumbbells, incline bench",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 86,
+            "name": "Spider Curl",
+            "muscle": "arms",
+            "difficulty": "intermediate",
+            "description": "Curl with arms hanging over incline bench",
+            "equipment": "dumbbells, incline bench",
+            "sets": 3,
+            "reps": "10-12",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 87,
+            "name": "Close-Grip Push-up",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Push-up with hands close together for triceps",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "10-15",
+            "duration": 25,
+            "calories": 25
+        },
+        {
+            "id": 88,
+            "name": "Reverse Curl",
+            "muscle": "arms",
+            "difficulty": "beginner",
+            "description": "Curl with overhand grip for forearms",
+            "equipment": "barbell",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 89,
+            "name": "Bicycle Crunch",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Alternate elbow to opposite knee while lying",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "20 each",
+            "duration": 25,
+            "calories": 25
+        },
+        {
+            "id": 90,
+            "name": "Side Plank",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Hold side plank position on forearm",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "30 sec each",
+            "duration": 25,
+            "calories": 15
+        },
+        {
+            "id": 91,
+            "name": "V-Ups",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Raise arms and legs to meet in V shape",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 25
+        },
+        {
+            "id": 92,
+            "name": "Reverse Crunch",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Raise hips off ground bringing knees to chest",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "15-20",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 93,
+            "name": "Decline Crunch",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Crunch on decline bench for added resistance",
+            "equipment": "decline bench",
+            "sets": 3,
+            "reps": "15-20",
+            "duration": 25,
+            "calories": 25
+        },
+        {
+            "id": 94,
+            "name": "Flutter Kicks",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Alternate kicking legs while lying on back",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "30 sec",
+            "duration": 25,
+            "calories": 20
+        },
+        {
+            "id": 95,
+            "name": "Toe Touch",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Reach for toes while lying with legs vertical",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "15-20",
+            "duration": 20,
+            "calories": 15
+        },
+        {
+            "id": 96,
+            "name": "Knee Raise",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Raise knees while hanging or on captain's chair",
+            "equipment": "pull-up bar",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 25
+        },
+        {
+            "id": 97,
+            "name": "Landmine Rotation",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Rotate barbell side to side in arc",
+            "equipment": "barbell, landmine",
+            "sets": 3,
+            "reps": "10 each",
+            "duration": 30,
+            "calories": 30
+        },
+        {
+            "id": 98,
+            "name": "Suitcase Carry",
+            "muscle": "core",
+            "difficulty": "intermediate",
+            "description": "Walk while carrying weight on one side only",
+            "equipment": "dumbbell",
+            "sets": 3,
+            "reps": "40m each",
+            "duration": 45,
+            "calories": 35
+        },
+        {
+            "id": 99,
+            "name": "Bird Dog",
+            "muscle": "core",
+            "difficulty": "beginner",
+            "description": "Extend opposite arm and leg while on all fours",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "10 each",
+            "duration": 25,
+            "calories": 15
+        },
+        {
+            "id": 100,
+            "name": "Superman",
+            "muscle": "back",
+            "difficulty": "beginner",
+            "description": "Raise arms and legs off floor while lying face down",
+            "equipment": "none",
+            "sets": 3,
+            "reps": "12-15",
+            "duration": 25,
+            "calories": 20
+        }
+    ],
+    "stretches": [
+        {
+            "id": 1,
+            "name": "Hamstring Stretch",
+            "targetArea": "legs",
+            "duration": 30,
+            "description": "Sit with one leg extended and reach for toes",
+            "holdTime": "30 seconds each leg"
+        },
+        {
+            "id": 2,
+            "name": "Quad Stretch",
+            "targetArea": "legs",
+            "duration": 30,
+            "description": "Stand on one leg and pull foot to glutes",
+            "holdTime": "30 seconds each leg"
+        },
+        {
+            "id": 3,
+            "name": "Hip Flexor Stretch",
+            "targetArea": "legs",
+            "duration": 30,
+            "description": "Lunge position with back knee on ground",
+            "holdTime": "30 seconds each side"
+        },
+        {
+            "id": 4,
+            "name": "Chest Stretch",
+            "targetArea": "upper",
+            "duration": 30,
+            "description": "Place arm on doorframe and lean forward",
+            "holdTime": "30 seconds each arm"
+        },
+        {
+            "id": 5,
+            "name": "Shoulder Stretch",
+            "targetArea": "upper",
+            "duration": 30,
+            "description": "Cross arm across body and press with other hand",
+            "holdTime": "30 seconds each arm"
+        },
+        {
+            "id": 6,
+            "name": "Tricep Stretch",
+            "targetArea": "arms",
+            "duration": 30,
+            "description": "Reach behind head and press elbow down",
+            "holdTime": "30 seconds each arm"
+        },
+        {
+            "id": 7,
+            "name": "Cat-Cow",
+            "targetArea": "back",
+            "duration": 60,
+            "description": "Alternate arching and rounding spine on all fours",
+            "holdTime": "5 seconds each position"
+        },
+        {
+            "id": 8,
+            "name": "Child's Pose",
+            "targetArea": "back",
+            "duration": 45,
+            "description": "Sit back on heels with arms extended forward",
+            "holdTime": "45 seconds"
+        },
+        {
+            "id": 9,
+            "name": "Pigeon Pose",
+            "targetArea": "hips",
+            "duration": 60,
+            "description": "One leg bent in front, other extended behind",
+            "holdTime": "60 seconds each side"
+        },
+        {
+            "id": 10,
+            "name": "Figure Four Stretch",
+            "targetArea": "hips",
+            "duration": 30,
+            "description": "Cross ankle over opposite knee while lying",
+            "holdTime": "30 seconds each side"
+        },
+        {
+            "id": 11,
+            "name": "Cobra Stretch",
+            "targetArea": "core",
+            "duration": 30,
+            "description": "Lie face down and press up with straight arms",
+            "holdTime": "30 seconds"
+        },
+        {
+            "id": 12,
+            "name": "Seated Spinal Twist",
+            "targetArea": "back",
+            "duration": 30,
+            "description": "Sit and twist torso while pressing against knee",
+            "holdTime": "30 seconds each side"
+        }
+    ],
+    "nutritionTips": [
+        {
+            "id": 1,
+            "category": "pre-workout",
+            "title": "Eat 1-2 Hours Before",
+            "tip": "Consume a balanced meal with carbs and protein 1-2 hours before training for optimal energy.",
+            "foods": [
+                "oatmeal",
+                "banana",
+                "greek yogurt",
+                "whole grain toast"
+            ]
+        },
+        {
+            "id": 2,
+            "category": "post-workout",
+            "title": "Protein Within 30 Minutes",
+            "tip": "Consume 20-40g of protein within 30 minutes after training to maximize muscle recovery.",
+            "foods": [
+                "protein shake",
+                "chicken breast",
+                "eggs",
+                "cottage cheese"
+            ]
+        },
+        {
+            "id": 3,
+            "category": "hydration",
+            "title": "Stay Hydrated",
+            "tip": "Drink at least 8 glasses of water daily, more if you're training intensely.",
+            "foods": [
+                "water",
+                "coconut water",
+                "electrolyte drinks"
+            ]
+        },
+        {
+            "id": 4,
+            "category": "muscle-building",
+            "title": "Caloric Surplus",
+            "tip": "To build muscle, consume 300-500 calories above maintenance with adequate protein.",
+            "foods": [
+                "lean meats",
+                "rice",
+                "potatoes",
+                "nuts",
+                "olive oil"
+            ]
+        },
+        {
+            "id": 5,
+            "category": "fat-loss",
+            "title": "Caloric Deficit",
+            "tip": "For fat loss, maintain a 300-500 calorie deficit while keeping protein high.",
+            "foods": [
+                "vegetables",
+                "lean protein",
+                "fruits",
+                "whole grains"
+            ]
+        },
+        {
+            "id": 6,
+            "category": "protein",
+            "title": "Protein Intake",
+            "tip": "Aim for 1.6-2.2g of protein per kg of bodyweight for muscle building.",
+            "foods": [
+                "chicken",
+                "fish",
+                "beef",
+                "tofu",
+                "legumes",
+                "eggs"
+            ]
+        },
+        {
+            "id": 7,
+            "category": "recovery",
+            "title": "Sleep Quality",
+            "tip": "Get 7-9 hours of quality sleep for optimal muscle recovery and hormone production.",
+            "foods": [
+                "magnesium-rich foods",
+                "tart cherry",
+                "chamomile tea"
+            ]
+        },
+        {
+            "id": 8,
+            "category": "supplements",
+            "title": "Essential Supplements",
+            "tip": "Consider creatine monohydrate (5g daily) as it's one of the most researched supplements.",
+            "foods": [
+                "creatine",
+                "vitamin D",
+                "omega-3",
+                "whey protein"
+            ]
         }
     ],
     "warmups": [
